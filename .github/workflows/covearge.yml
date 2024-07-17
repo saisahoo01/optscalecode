@@ -36,10 +36,10 @@ jobs:
       run: |
         git config --global user.name 'saisahoo01'
         git config --global user.email 'sailokeshbasava123@gmail.com'
-        git checkout -b add-coverage-report
+        git checkout -b add-coverage-report-${{ github.sha }}
         git add coverage/coverage.xml
         git commit -m 'Add coverage report'
-        git push origin add-coverage-report
+        git push origin add-coverage-report-${{ github.sha }}
       continue-on-error: true
       env:
         GITHUB_TOKEN: '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'
