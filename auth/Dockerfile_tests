@@ -1,5 +1,5 @@
 ARG BUILDTAG=build
-FROM auth:${BUILDTAG}
+FROM sailokeshbasava/auth:${BUILDTAG}
 LABEL org.opencontainers.image.authors="Hystax"
 
 COPY tools/check_alembic_down_revisions tools/check_alembic_down_revisions
