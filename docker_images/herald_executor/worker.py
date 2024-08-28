@@ -1,4 +1,3 @@
-#new
 #!/usr/bin/env python
 import calendar
 import os
