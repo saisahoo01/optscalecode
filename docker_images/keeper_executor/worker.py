@@ -1,4 +1,4 @@
-#!/usr/bin/env pythonhjvgtfxh
+#!/usr/bin/env python
 import hashlib
 import os
 import time
