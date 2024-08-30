@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -e
-
+#jed
 BUILD_TAG='build'
 TEST_IMAGE=auth_tests:${BUILD_TAG}
 
