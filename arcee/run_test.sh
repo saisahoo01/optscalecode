@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-#jcnskz
 set -e
 
 BUILD_TAG='build'
