@@ -1,4 +1,8 @@
+{{- if .Values.report_import_scheduler }}
 {{- $config := .Values.report_import_scheduler }}
+{{- else }}
+{{- $config := dict "name" "default-name" "image" (dict "repository" "default-repo" "tag" "latest" "pullPolicy" "Always") "startingDeadlineSeconds" 100 }}
+{{- end }}
 ---
 apiVersion: v1
 kind: Secret
@@ -8,8 +12,13 @@ metadata:
     app: {{ $config.name }}
     release: "{{ .Release.Name }}"
 type: Opaque
+{{- if .Values.secrets.cluster }}
 data:
   cluster_secret: {{ .Values.secrets.cluster | b64enc | quote }}
+{{- else }}
+data:
+  cluster_secret: {{ "default-cluster-secret" | b64enc | quote }}
+{{- end }}
 {{- range $period, $schedule := .Values.report_import_schedules }}
 ---
 apiVersion: batch/v1beta1
@@ -40,7 +49,9 @@ spec:
             release: {{ $.Release.Name }}
         spec:
           initContainers:
+{{- if .Values.rest_api }}
 {{ include "wait_for_service" $.Values.rest_api | indent 10 }}
+{{- end }}
           containers:
           - name: {{ $config.name }}-{{ $period }}
             image: "{{ $config.image.repository }}:{{ $config.image.tag }}"
